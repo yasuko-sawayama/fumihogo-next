@@ -39,6 +39,7 @@ export default function Home({
             </li>
           ))}
         </ul>
+      </Main>
     </Flex>
   );
 }
