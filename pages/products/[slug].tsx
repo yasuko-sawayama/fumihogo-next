@@ -29,7 +29,7 @@ export default ProductPage;
 export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
-  const data = await getProduct(params.slug);
+  const data = await getProduct(params?.slug ?? "");
 
   return {
     props: {
