@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import { getAllProductsWithSlug } from "../lib/api"
 
@@ -19,7 +20,7 @@ export default function Home({ allPosts }) {
         <ul>
           {allPosts.map(({slug, title}) => (
             <li key={ slug}>
-              { title}
+              <Link href={`/products/${slug}`}><a>{ title }</a></Link>
             </li>
           ))}
         </ul>
