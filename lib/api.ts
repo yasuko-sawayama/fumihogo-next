@@ -25,6 +25,10 @@ description
 function extractProductEntries(fetchResponse) {
     return fetchResponse?.data?.productCollection?.items
 }
+
+function extractProduct(fetchResponse) {
+    return fetchResponse?.data?.productCollection?.items?.[0]
+}
   
 export async function getAllProductsWithSlug() {
     const entries = await fetchGraphQL(
@@ -37,4 +41,18 @@ export async function getAllProductsWithSlug() {
       }`
     )
     return extractProductEntries(entries)
-  }
+}
+  
+export async function getProduct(slug: string) {
+    const entry = await fetchGraphQL(
+        `query {
+          productCollection(where: { slug: "${slug}"}, limit: 1) {
+            items {
+              ${PRODUCT_GRAPHQL_FIELDS}
+            }
+          }
+        }`
+    )
+
+    return extractProduct(entry)
+}

@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css'
 import { getAllProductsWithSlug } from "../lib/api"
 
 export default function Home({ allPosts }) {
-  console.log(allPosts)
+
   return (
     <div className={styles.container}>
       <Head>
@@ -16,6 +16,13 @@ export default function Home({ allPosts }) {
         </h1>
         <p>fumihogoをNext.jsで作ってみる
         </p>
+        <ul>
+          {allPosts.map(({slug, title}) => (
+            <li key={ slug}>
+              { title}
+            </li>
+          ))}
+        </ul>
       </main>
 
       <footer className={styles.footer}>
