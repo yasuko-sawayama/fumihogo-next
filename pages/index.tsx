@@ -1,49 +1,52 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import styles from '../styles/Home.module.css'
-import { getAllProductsWithSlug } from "../lib/api"
+import Head from "next/head";
+import NextLink from "next/link";
+import { GetStaticProps } from "next";
+import { Heading, Link, Flex } from "@chakra-ui/react";
+import styled from "@emotion/styled";
+import styles from "../styles/Home.module.css";
+import { getAllProductsWithSlug } from "../lib/api";
 
-export default function Home({ allPosts }) {
+const Main = styled.main`
+  padding: 5rem 0;
+`;
 
+export default function Home({
+  allContentData,
+}: {
+  allContentData: {
+    title: string;
+    slug: string;
+    description: string;
+  }[];
+}): JSX.Element {
   return (
-    <div className={styles.container}>
+    <Flex flexDirection="column" alignItems="center" margin={4}>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
+      <Main>
+        <Heading as="h1" size="4xl" marginY="2rem">
           learning <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-        <p>fumihogoをNext.jsで作ってみる
-        </p>
+        </Heading>
+        <p>fumihogoをNext.jsで作ってみる</p>
         <ul>
-          {allPosts.map(({slug, title}) => (
-            <li key={ slug}>
-              <Link href={`/products/${slug}`}><a>{ title }</a></Link>
+          {allContentData.map(({ slug, title }) => (
+            <li key={slug}>
+              <NextLink href={`/products/${slug}`} passHref>
+                <Link>{title}</Link>
+              </NextLink>
             </li>
           ))}
         </ul>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+      </Main>
+    </Flex>
+  );
 }
 
-
-export async function getStaticProps() {
-  const allPosts = (await getAllProductsWithSlug()) ?? []
+export const getStaticProps: GetStaticProps = async () => {
+  const allContentData = (await getAllProductsWithSlug()) ?? [];
   return {
-    props: { allPosts },
-  }
-}
+    props: { allContentData },
+  };
+};
