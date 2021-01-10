@@ -1,9 +1,37 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+const plugins = [require("@tailwindcss/typography")];
+
 module.exports = {
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+  },
   purge: ["./pages/**/*.js", "./components/**/*.js"],
   darkMode: false, // or 'media' or 'class',
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          "YakuHanJP",
+          "Noto Sans JP",
+          "Yu Gothic",
+          "YuGothic",
+          "ヒラギノ角ゴ ProN W3",
+          "Hiragino Kaku Gothic ProN",
+          "メイリオ",
+          "Meiryo",
+          ...defaultTheme.fontFamily.sans,
+        ],
+      },
       colors: {
+        text: {
+          primary: "#e3261f",
+          secondary: "##203744",
+        },
+        theme: {
+          primary: "#e3261f",
+          secondary: "#00bfd7",
+        },
         scarlet: {
           50: "#fcf8f6",
           100: "#fceeed",
@@ -130,5 +158,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: plugins,
 };
