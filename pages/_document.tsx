@@ -1,3 +1,4 @@
+import NavBar from "../components/NavBar";
 import Document, {
   Html,
   Head,
@@ -18,10 +19,16 @@ class MyDocument extends Document {
         lang="ja"
         className="text-gray-800 antialiased bg-white js-focus-visible"
       >
+        <link
+          href="https://fonts.googleapis.com/earlyaccess/hannari.css"
+          rel="stylesheet"
+        />
+
         <Head />
         <body className="bg-white">
           <div className="min-w-0 w-full flex-auto lg:static lg:max-h-full lg:overflow-visible">
-            <div className="container mx-auto mt-4 pt-12">
+            <div className="container mx-auto mt-2 pt-1">
+              <NavBar />
               <Main />
               <NextScript />
             </div>
