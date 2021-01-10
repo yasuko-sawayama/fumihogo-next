@@ -8,7 +8,9 @@ module.exports = {
     sourceType: "module", // Allows for the use of imports
   },
   extends: [
+    "eslint:recommended",
     "plugin:@typescript-eslint/recommended", // Uses the recommended rules from the @typescript-eslint/eslint-plugin
+    "prettier",
     "plugin:prettier/recommended",
   ],
   plugins: ["@typescript-eslint", "react"],
