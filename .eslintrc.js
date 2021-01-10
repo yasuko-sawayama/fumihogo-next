@@ -1,4 +1,8 @@
 module.exports = {
+  env: {
+    browser: true,
+    node: true,
+  },
   parser: "@typescript-eslint/parser", // Specifies the ESLint parser
   parserOptions: {
     ecmaFeatures: {
@@ -13,25 +17,18 @@ module.exports = {
     "prettier",
     "plugin:prettier/recommended",
   ],
-  plugins: ["@typescript-eslint", "react"],
+  plugins: ["@typescript-eslint"],
   rules: {
     "react/react-in-jsx-scope": "off",
-    // Turn off this rule for ts and tsx files:
-    "react/jsx-filename-extension": [
-      1,
-      { extensions: [".js", ".jsx", ".ts", ".tsx"] },
-    ],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        // This is so that we can import non-js files.
-        js: "never",
-        jsx: "never",
-        ts: "never",
-        tsx: "never",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+  },
+  settings: {
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
       },
-    ],
+      typescript: {}, // 追加
+    },
   },
   globals: {
     React: "writable",
