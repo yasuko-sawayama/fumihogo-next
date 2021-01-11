@@ -9,6 +9,9 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^0.16.0",
+    "@contentful/rich-text-html-renderer": "^14.1.2",
+    "@contentful/rich-text-react-renderer": "^14.1.2",
+    "contentful": "^8.1.7",
     "framer-motion": "^2.9.4",
     "next": "10.0.1",
     "postcss": "^8.2.4",

@@ -5,6 +5,8 @@ import {
   GetStaticPropsContext,
   NextPage,
 } from "next";
+
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { getAllProductsWithSlug, getPage, getProduct } from "../../lib/api";
 import { Page, Product } from "../../models/product";
 
@@ -15,6 +17,8 @@ const ProductPage: NextPage<{
   productData,
   firstPageData,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const contentHtml = documentToHtmlString(firstPageData.content.json);
+
   return (
     <>
       <div className="p-5 pb-10 border-b border-gray-200 mb-10 lg:w-2/3 mx-auto ">
@@ -31,13 +35,19 @@ const ProductPage: NextPage<{
           <div className="lg:w-2/3 mx-auto leading-8 tracking-wide text-base">
             <div className="mb-4">
               {firstPageData.title && (
-                <h2 className="font-semibold text-lg">{firstPageData.title}</h2>
+                <h2 className="font-semibold text-lg max-w-xl">
+                  {firstPageData.title}
+                </h2>
               )}
-              <span className="text-sm text-gray-500 right-10 absolute">
+              <span className="text-sm text-gray-500 right-10 top-8 absolute">
                 Page {firstPageData.pageNumber}
               </span>
             </div>
-            <div>{JSON.stringify(firstPageData)}</div>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: contentHtml,
+              }}
+            ></div>
           </div>
         </div>
       </section>
