@@ -5,11 +5,16 @@ import {
   GetStaticPropsContext,
   NextPage,
 } from "next";
-import { getAllProductsWithSlug, getProduct } from "../../lib/api";
+import { getAllProductsWithSlug, getPage, getProduct } from "../../lib/api";
+import { Page, Product } from "../../models/product";
 
 const ProductPage: NextPage<{
   productData: Product;
-}> = ({ productData }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  firstPageData: Page;
+}> = ({
+  productData,
+  firstPageData,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <div className="p-5 pb-10 border-b border-gray-200 mb-10 lg:w-2/3 mx-auto ">
@@ -19,18 +24,20 @@ const ProductPage: NextPage<{
           </h1>
         </div>
         <p className="mt-1 text-lg text-gray-500">{productData.description}</p>
+        <div>{JSON.stringify(productData)}</div>
       </div>
       <section className="relative">
         <div className="container px-5 py-8 mx-auto">
           <div className="lg:w-2/3 mx-auto leading-8 tracking-wide text-base">
-            <p>
-              私は今日初めてこの学習院というものの中に這入はいりました。もっとも以前から学習院は多分この見当だろうぐらいに考えていたには相違そういありませんが、はっきりとは存じませんでした。中へ這入ったのは無論今日が初めてでございます。
-            </p>
-            　さきほど岡田さんが紹介しょうかいかたがたちょっとお話になった通りこの春何か講演をというご注文でありましたが、その当時は何か差支さしつかえがあって、――岡田さんの方が当人の私よりよくご記憶きおくと見えてあなたがたにご納得のできるようにただいまご説明がありましたが、とにかくひとまずお断りを致いたさなければならん事になりました。しかしただお断りを致すのもあまり失礼と存じまして、この次には参りますからという条件をつけ加えておきました。その時念のためこの次はいつごろになりますかと岡田さんに伺うかがいましたら、此年ことしの十月だというお返事であったので、心のうちに春から十月までの日数を大体繰くってみて、それだけの時間があればそのうちにどうにかできるだろうと思ったものですから、よろしゅうございますとはっきりお受合うけあい申したのであります。ところが幸か不幸か病気に罹かかりまして、九月いっぱい床とこについておりますうちにお約束やくそくの十月が参りました。十月にはもう臥ふせってはおりませんでしたけれども、何しろひょろひょろするので講演はちょっとむずかしかったのです。しかしお約束を忘れてはならないのですから、腹の中では、今に何か云いって来られるだろう来られるだろうと思って、内々ないないは怖こわがっていました。
-            　そのうちひょろひょろもついに癒なおってしまったけれども、こちらからは十月末まで何のご沙汰さたもなく打ち過ぎました。私は無論病気の事をご通知はしておきませんでしたが、二三の新聞にちょっと出たという話ですから、あるいはその辺の事情を察せられて、誰だれかが私の代りに講演をやって下さったのだろうと推測して安心し出しました。ところへまた岡田さんがまた突然とつぜん見えたのであります。岡田さんはわざわざ長靴を穿はいて見えたのであります。（もっとも雨の降る日であったからでもありましょうが、）そう云った身拵みごしらえで、早稲田わせだの奥おくまで来て下すって、例の講演は十一月の末まで繰り延ばす事にしたから約束通りやってもらいたいというご口上なのです。私はもう責任を逃のがれたように考えていたものですから実は少々驚おどろきました。しかしまだ一カ月も余裕よゆうがあるから、その間にどうかなるだろうと思って、よろしゅうございますとまたご返事を致しました。
-            　右の次第で、この春から十月に至るまで、十月末からまた十一月二十五日に至るまでの間に、何か纏まとまったお話をすべき時間はいくらでも拵えられるのですが、どうも少し気分が悪くって、そんな事を考えるのが面倒めんどうでたまらなくなりました。そこでまあ十一月二十五日が来るまでは構うまいという横着な料簡りょうけんを起おこして、ずるずるべったりにその日その日を送っていたのです。いよいよと時日が逼せまった二三日前になって、何か考えなければならないという気が少ししたのですが、やはり考えるのが不愉快ふゆかいなので、とうとう絵を描かいて暮くらしてしまいました。絵を描くというと何かえらいものが描けるように聞きこえるかも知れませんが、実は他愛もないものを描いて、それを壁かべに貼はりつけて一人で二日も三日もぼんやり眺ながめているだけなのです。昨日でしたかある人が来て、この絵は大変面白い――いや面白いと云ったのではありません、面白い気分の時に描いた画えらしく見えると云ってくれたのでした。それから私は愉快だから描いたのではない、不愉快だから描いたのだと云って私の心の状態をその男に説明してやりました。世の中には愉快でじっとしていられない結果を画にしたり、書にしたり、または文にしたりする人がある通り、不愉快だから、どうかして好い心持こころもちになりたいと思って、筆を執とって画なり文章なりを作る人もあります。そうして不思議にもこの二つの心的状態が結果に現われたところを見るとよく一致いっちしている場合が起るのです。しかしこれはほんのついでに申し上あげる事で、話の筋に関係した問題でもありませんから深くは立ち入りません。――何しろ私はその変な画を眺めるだけで、講演の内容をちっとも組み立てずに暮らしてしまったのです。
-            　そのうちいよいよ二十五日が来たので、否いやでも応でもここへ顔を出さなければすまない事になりました。それで今朝けさ少し考かんがえを纏まとめてみましたが、準備がどうも不足のようです。とてもご満足の行くようなお話はできかねますから、そのつもりでご辛防しんぼうを願います。
-            　この会はいつごろから始まって今日まで続いているのか存じませんが、そのつどあなたがたがよその人を連れて来て、講演をさせるのは、一般の慣例として毫ごうも不都合でないと私も認めているのですが、また一方から見ると、それほどあなた方の希望するような面白い講演は、いくらどこからどんな人を引張ひっぱって来ても容易に聞かれるものではなかろうとも思うのです。あなたがたにはただよその人が珍めずらしく見えるのではありますまいか。
+            <div className="mb-4">
+              {firstPageData.title && (
+                <h2 className="font-semibold text-lg">{firstPageData.title}</h2>
+              )}
+              <span className="text-sm text-gray-500 right-10 absolute">
+                Page {firstPageData.pageNumber}
+              </span>
+            </div>
+            <div>{JSON.stringify(firstPageData)}</div>
           </div>
         </div>
       </section>
@@ -38,22 +45,19 @@ const ProductPage: NextPage<{
   );
 };
 
-type Product = {
-  title: string;
-  slug: string;
-  description: string;
-};
-
 export default ProductPage;
 
 export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
-  const data = await getProduct(params?.slug ?? "");
+  const data: Product = await getProduct(params?.slug ?? "");
+  const firstPageId = data.pagesCollection.items[0].sys.id;
+  const firstPageData: Page = await getPage(firstPageId);
 
   return {
     props: {
       productData: data ?? null,
+      firstPageData,
     },
   };
 };
