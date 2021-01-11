@@ -1,4 +1,3 @@
-import NavBar from "../components/NavBar";
 import Document, {
   Html,
   Head,
@@ -8,11 +7,6 @@ import Document, {
 } from "next/document";
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext) {
-    const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
-  }
-
   render() {
     return (
       <Html
@@ -28,7 +22,6 @@ class MyDocument extends Document {
         <body className="bg-white">
           <div className="min-w-0 w-full flex-auto lg:static lg:max-h-full lg:overflow-visible">
             <div className="container mx-auto mt-2 pt-1">
-              <NavBar />
               <Main />
               <NextScript />
             </div>

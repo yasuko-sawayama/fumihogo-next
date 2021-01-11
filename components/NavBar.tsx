@@ -1,3 +1,6 @@
+import Link from "next/link";
+import LoginLink from "./LoginLink";
+
 export default function NavBar() {
   return (
     <header className="sticky top-0 z-40 w-full max-w-8xl mx-auto  mb-8 bg-white flex-none flex shadow-md">
@@ -26,20 +29,8 @@ export default function NavBar() {
           <a className="mr-5 hover:text-gray-900">First Link</a>
           <a className="mr-5 hover:text-gray-900">Second Link</a>
         </nav>
-        <button className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
-          ログイン
-          <svg
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            className="w-4 h-4 ml-1"
-            viewBox="0 0 24 24"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg>
-        </button>
+
+        <LoginLink />
       </div>
     </header>
   );
