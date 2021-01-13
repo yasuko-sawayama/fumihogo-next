@@ -1,6 +1,7 @@
 export type Product = {
   title: string;
   slug: string;
+  scope: number;
   description?: string;
   pagesCollection: {
     total: number;

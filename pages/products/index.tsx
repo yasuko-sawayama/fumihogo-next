@@ -1,5 +1,4 @@
 import { GetStaticProps } from "next";
-import Link from "next/link";
 import { getAllProductsWithSlug } from "../../lib/api";
 import ListItem from "../../components/products/ListItem";
 import { Product } from "../../models/product";
@@ -29,9 +28,14 @@ export default function AllProducts({ allContentData }: ProductData) {
       <section className="text-gray-600 body-font overflow-hidden">
         <div className="container px-5 py-24 mx-auto">
           <ul>
-            {allContentData.map(({ slug, title, description }) => (
+            {allContentData.map(({ slug, title, scope, description }) => (
               <li key={slug}>
-                <ListItem title={title} slug={slug} description={description} />
+                <ListItem
+                  title={title}
+                  scope={scope}
+                  slug={slug}
+                  description={description}
+                />
               </li>
             ))}
           </ul>

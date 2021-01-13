@@ -5,19 +5,22 @@ import {
   GetStaticPropsContext,
   NextPage,
 } from "next";
-
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { getAllProductsWithSlug, getPage, getProduct } from "../../lib/api";
 import { Page, Product } from "../../models/product";
+import React from "react";
+import AuthContent from "../../components/products/AuthContent";
+import PageContent from "../../components/products/PageContent";
 
 const ProductPage: NextPage<{
   productData: Product;
+  firstPageId: string;
   firstPageData: Page;
 }> = ({
   productData,
+  firstPageId,
   firstPageData,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const contentHtml = documentToHtmlString(firstPageData.content.json);
+}: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element => {
+  const scope = productData.scope;
 
   return (
     <>
@@ -28,26 +31,15 @@ const ProductPage: NextPage<{
           </h1>
         </div>
         <p className="mt-1 text-lg text-gray-500">{productData.description}</p>
-        <div>{JSON.stringify(productData)}</div>
       </div>
       <section className="relative">
         <div className="container px-5 py-8 mx-auto">
-          <div className="lg:w-2/3 mx-auto leading-8 tracking-wide text-base">
-            <div className="mb-4">
-              {firstPageData.title && (
-                <h2 className="font-semibold text-lg max-w-xl">
-                  {firstPageData.title}
-                </h2>
-              )}
-              <span className="text-sm text-gray-500 right-10 top-8 absolute">
-                Page {firstPageData.pageNumber}
-              </span>
-            </div>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: contentHtml,
-              }}
-            ></div>
+          <div className="lg:w-2/3 mx-auto leading-8 tracking-wide text-base relative">
+            {scope === 0 ? (
+              <PageContent {...firstPageData} />
+            ) : (
+              <AuthContent pageId={firstPageId} />
+            )}
           </div>
         </div>
       </section>
@@ -67,7 +59,8 @@ export const getStaticProps: GetStaticProps = async ({
   return {
     props: {
       productData: data ?? null,
-      firstPageData,
+      firstPageId,
+      firstPageData: firstPageData,
     },
   };
 };
