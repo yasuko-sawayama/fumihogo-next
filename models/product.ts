@@ -1,3 +1,5 @@
+import { Document } from "@contentful/rich-text-types";
+
 export type Product = {
   title: string;
   slug: string;
@@ -21,5 +23,7 @@ export type PageInfo = {
 export type Page = {
   title?: string;
   pageNumber: number;
-  content: any;
+  content: {
+    json: Document;
+  };
 };

@@ -45,8 +45,6 @@ export default function ProductPerPage({ product, pageId, page }: PageProps) {
 export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
-  if (!params) return { props: null };
-
   const pageNumber = params?.page ? params.page : 1;
 
   // 一度でQueryする方法がわからないので

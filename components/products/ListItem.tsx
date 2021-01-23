@@ -1,7 +1,14 @@
 import Link from "next/link";
 import { Product } from "../../models/product";
 
-export default function ListItem({ title, slug, description }: Product) {
+type ListItemProps = {
+  title: string;
+  scope: number;
+  slug: string;
+  description?: string;
+};
+
+export default function ListItem({ title, slug, description }: ListItemProps) {
   return (
     <div className="flex flex-wrap -m-12">
       <div className="p-12 md:w-1/2 flex flex-col items-start">

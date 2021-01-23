@@ -1,7 +1,7 @@
 import { Page } from "models/product";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
-const PageContent: React.FC<Page> = ({ title, pageNumber, content }) => {
+export default function PageContent({ title, pageNumber, content }: Page) {
   const contentHtml = documentToHtmlString(content.json);
 
   return (
@@ -19,6 +19,4 @@ const PageContent: React.FC<Page> = ({ title, pageNumber, content }) => {
       ></div>
     </>
   );
-};
-
-export default PageContent;
+}

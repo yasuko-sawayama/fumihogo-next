@@ -1,15 +1,15 @@
 import { useFetchUser } from "lib/user";
 import { useState, useEffect } from "react";
 import PageContent from "./PageContent";
+import { Page } from "../../models/product";
 
 type AuthContentProps = {
   pageId: string;
 };
 
 const AuthContent = ({ pageId }: AuthContentProps) => {
-  console.log(pageId);
   const { user, loading } = useFetchUser();
-  const [pageData, setPageData] = useState();
+  const [pageData, setPageData] = useState<Page | undefined>();
 
   const fetchData = async () => {
     // ページはidで取得するためcontentful上では一意に特定できる
