@@ -18,7 +18,7 @@ export default function ProductPerPage({ product, pageIds, page }: PageProps) {
 
   return (
     <>
-      <div className="p-5 pb-10 border-b border-gray-200 mb-10 lg:w-2/3 mx-auto ">
+      <div className="p-5 pb-10 border-b border-gray-200 mb-10 lg:w-5/6 mx-auto ">
         <div className="flex items-center ">
           <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
             {product.title}
