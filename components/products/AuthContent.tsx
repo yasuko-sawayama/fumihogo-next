@@ -21,7 +21,7 @@ const AuthContent = ({ pageId }: AuthContentProps) => {
     if (!user) return;
 
     fetchData();
-  }, []);
+  }, [user]);
 
   if (loading) return <div>Loading</div>;
 
