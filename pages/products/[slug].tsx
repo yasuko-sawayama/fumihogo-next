@@ -13,6 +13,7 @@ import { Page, Product } from "../../models/product";
 import AuthContent from "../../components/products/AuthContent";
 import PageContent from "../../components/products/PageContent";
 import TableOfContents from "../../components/products/TableOfContents";
+import TOCWithAuth from "../../components/products/TOCWithAuth";
 
 const ProductPage: NextPage<{
   productData: Product;
@@ -37,9 +38,7 @@ const ProductPage: NextPage<{
       </div>
       <section className="relative">
         <div className="container px-5 py-8 mx-auto flex flex-col sm:flex-row sm:justify-around">
-          {productData.pagesCollection.total > 0 && (
-            <TableOfContents data={productData} currentPage={1} />
-          )}
+          <TOCWithAuth product={productData} page={firstPageData} />
 
           <div className="lg:w-2/3 mx-auto leading-8 tracking-wide text-base relative">
             <div>

@@ -7,6 +7,7 @@ type AuthContentProps = {
 };
 
 const AuthContent = ({ pageId }: AuthContentProps) => {
+  console.log(pageId);
   const { user, loading } = useFetchUser();
   const [pageData, setPageData] = useState();
 

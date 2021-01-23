@@ -2,9 +2,9 @@ import { getAllProductsWithSlug, getProduct, getPageById } from "lib/api";
 import { Page, Product } from "models/product";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { PageInfo } from "../../../models/product";
-import TableOfContents from "../../../components/products/TableOfContents";
 import PageContent from "../../../components/products/PageContent";
 import AuthContent from "../../../components/products/AuthContent";
+import TOCWithAuth from "../../../components/products/TOCWithAuth";
 
 type PageProps = {
   product: Product;
@@ -26,10 +26,7 @@ export default function ProductPerPage({ product, pageId, page }: PageProps) {
       </div>
       <section className="relative">
         <div className="container px-5 py-8 mx-auto flex flex-col sm:flex-row sm:justify-around">
-          {product.pagesCollection.total > 0 && (
-            <TableOfContents data={product} currentPage={page.pageNumber} />
-          )}
-
+          <TOCWithAuth product={product} page={page} />
           <div className="lg:w-2/3 mx-auto leading-8 tracking-wide text-base relative">
             <div>
               {scope === 0 ? (
