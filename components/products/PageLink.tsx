@@ -12,7 +12,7 @@ export default function PageLink({
 }: PageLinkProps) {
   return (
     <Link href={`/products/${slug}/${pageNumber}`} passHref>
-      <a>
+      <a className="hover:text-gray-800 hover:bg-scarlet-200 flex items-center p-2 my-1 transition-colors duration-200  text-gray-800 rounded-md bg-white">
         Page{pageNumber}. {title}
       </a>
     </Link>

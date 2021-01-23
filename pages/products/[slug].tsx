@@ -5,12 +5,14 @@ import {
   GetStaticPropsContext,
   NextPage,
 } from "next";
+import React, { useState } from "react";
+
 import { getAllProductsWithSlug, getPage, getProduct } from "../../lib/api";
 import { Page, Product } from "../../models/product";
-import React from "react";
+
 import AuthContent from "../../components/products/AuthContent";
 import PageContent from "../../components/products/PageContent";
-import TableOfContent from "../../components/products/TableOfContent";
+import TableOfContents from "../../components/products/TableOfContents";
 
 const ProductPage: NextPage<{
   productData: Product;
@@ -22,6 +24,7 @@ const ProductPage: NextPage<{
   firstPageData,
 }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element => {
   const scope = productData.scope;
+  const [showToc, setShowToc] = useState(true);
 
   return (
     <>
@@ -34,9 +37,12 @@ const ProductPage: NextPage<{
         <p className="mt-1 text-lg text-gray-500">{productData.description}</p>
       </div>
       <section className="relative">
-        <div className="container px-5 py-8 mx-auto">
+        <div className="container px-5 py-8 mx-auto flex flex-col sm:flex-row sm:justify-around">
+          {productData.pagesCollection.total > 0 && (
+            <TableOfContents data={productData} currentPage={1} />
+          )}
+
           <div className="lg:w-2/3 mx-auto leading-8 tracking-wide text-base relative">
-            <TableOfContent data={productData} currentPage={1} />
             <div>
               {scope === 0 ? (
                 <PageContent {...firstPageData} />
