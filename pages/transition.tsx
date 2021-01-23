@@ -5,9 +5,12 @@ export default function transition() {
   const [showToc, setShowToc] = useState(true);
   return (
     <>
-      <div>ここにコンテンツ？</div>
       <div className="fixed inset-0 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
+          <div className="mt-20">
+            <button onClick={() => setShowToc(true)}>メニュー</button>
+            <p>ここにコンテンツ？</p>
+          </div>
           <Transition
             show={showToc}
             enter="ease-in-out duration-500"

@@ -1,6 +1,6 @@
 import auth0 from "../../../lib/auth0";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getPage } from "lib/api";
+import { getPageById } from "lib/api";
 
 export default async function getPageById(
   req: NextApiRequest,
@@ -14,7 +14,7 @@ export default async function getPageById(
 
   // ページはIDで取得するためContentful上では一意に特定できる
   const pageId = req.query.id;
-  const data = await getPage(pageId);
+  const data = await getPageById(pageId);
 
   if (!data) return res.status(404).end("page not found");
 

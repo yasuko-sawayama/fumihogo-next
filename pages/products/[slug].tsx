@@ -5,9 +5,9 @@ import {
   GetStaticPropsContext,
   NextPage,
 } from "next";
-import React, { useState } from "react";
+import React from "react";
 
-import { getAllProductsWithSlug, getPage, getProduct } from "../../lib/api";
+import { getAllProductsWithSlug, getPageById, getProduct } from "../../lib/api";
 import { Page, Product } from "../../models/product";
 
 import AuthContent from "../../components/products/AuthContent";
@@ -24,7 +24,6 @@ const ProductPage: NextPage<{
   firstPageData,
 }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element => {
   const scope = productData.scope;
-  const [showToc, setShowToc] = useState(true);
 
   return (
     <>
@@ -64,7 +63,7 @@ export const getStaticProps: GetStaticProps = async ({
 }: GetStaticPropsContext) => {
   const data: Product = await getProduct(params?.slug ?? "");
   const firstPageId = data.pagesCollection.items[0].sys.id;
-  const firstPageData: Page = await getPage(firstPageId);
+  const firstPageData: Page = await getPageById(firstPageId);
 
   return {
     props: {
