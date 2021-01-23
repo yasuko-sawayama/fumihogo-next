@@ -9,7 +9,8 @@ export type Product = {
   };
 };
 
-type PageInfo = {
+export type PageInfo = {
+  slug: string;
   sys: {
     id: string;
   };

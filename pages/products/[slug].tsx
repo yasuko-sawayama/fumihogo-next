@@ -10,6 +10,8 @@ import { Page, Product } from "../../models/product";
 import React from "react";
 import AuthContent from "../../components/products/AuthContent";
 import PageContent from "../../components/products/PageContent";
+import PageLink from "../../components/products/PageLink";
+import { PageInfo } from "../../components/products/PageLink";
 
 const ProductPage: NextPage<{
   productData: Product;
@@ -22,6 +24,7 @@ const ProductPage: NextPage<{
 }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element => {
   const scope = productData.scope;
 
+  console.log(productData);
   return (
     <>
       <div className="p-5 pb-10 border-b border-gray-200 mb-10 lg:w-2/3 mx-auto ">
@@ -35,11 +38,25 @@ const ProductPage: NextPage<{
       <section className="relative">
         <div className="container px-5 py-8 mx-auto">
           <div className="lg:w-2/3 mx-auto leading-8 tracking-wide text-base relative">
-            {scope === 0 ? (
-              <PageContent {...firstPageData} />
-            ) : (
-              <AuthContent pageId={firstPageId} />
-            )}
+            {productData.pagesCollection.total}
+            <ul>
+              {productData.pagesCollection.items.map((page: PageInfo) => (
+                <li key={page.sys.id}>
+                  {page.pageNumber === 1 ? (
+                    <span>Page1. {page.title}</span>
+                  ) : (
+                    <PageLink slug={productData.slug} pageInfo={page} />
+                  )}
+                </li>
+              ))}
+            </ul>
+            <div>
+              {scope === 0 ? (
+                <PageContent {...firstPageData} />
+              ) : (
+                <AuthContent pageId={firstPageId} />
+              )}
+            </div>
           </div>
         </div>
       </section>
