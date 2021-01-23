@@ -11,12 +11,15 @@ const AuthContent = ({ pageId }: AuthContentProps) => {
   const [pageData, setPageData] = useState();
 
   const fetchData = async () => {
+    // ページはidで取得するためcontentful上では一意に特定できる
     const data = await fetch(`/api/page/${pageId}`);
 
     setPageData(await data.json());
   };
 
   useEffect(() => {
+    if (!user) return;
+
     fetchData();
   }, []);
 
