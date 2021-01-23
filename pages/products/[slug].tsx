@@ -8,20 +8,20 @@ import {
 import React from "react";
 
 import { getAllProductsWithSlug, getPageById, getProduct } from "../../lib/api";
-import { Page, Product } from "../../models/product";
+import { Page, PageInfo, Product } from "../../models/product";
 
 import AuthContent from "../../components/products/AuthContent";
 import PageContent from "../../components/products/PageContent";
-import TableOfContents from "../../components/products/TableOfContents";
 import TOCWithAuth from "../../components/products/TOCWithAuth";
+import { sortedPages } from "lib/utils";
 
 const ProductPage: NextPage<{
   productData: Product;
-  firstPageId: string;
+  pageIds: string[];
   firstPageData: Page;
 }> = ({
   productData,
-  firstPageId,
+  pageIds,
   firstPageData,
 }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element => {
   const scope = productData.scope;
@@ -45,7 +45,7 @@ const ProductPage: NextPage<{
               {scope === 0 ? (
                 <PageContent {...firstPageData} />
               ) : (
-                <AuthContent pageId={firstPageId} />
+                <AuthContent pageIds={pageIds} />
               )}
             </div>
           </div>
@@ -63,11 +63,14 @@ export const getStaticProps: GetStaticProps = async ({
   const data: Product = await getProduct(params?.slug ?? "");
   const firstPageId = data.pagesCollection.items[0].sys.id;
   const firstPageData: Page = await getPageById(firstPageId);
+  const pageIds = sortedPages(data.pagesCollection).map(
+    (item: PageInfo) => item.sys.id
+  );
 
   return {
     props: {
       productData: data ?? null,
-      firstPageId,
+      pageIds,
       firstPageData: firstPageData,
     },
   };

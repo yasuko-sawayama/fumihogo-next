@@ -5,14 +5,15 @@ import { PageInfo } from "../../../models/product";
 import PageContent from "../../../components/products/PageContent";
 import AuthContent from "../../../components/products/AuthContent";
 import TOCWithAuth from "../../../components/products/TOCWithAuth";
+import { sortedPages } from "lib/utils";
 
 type PageProps = {
   product: Product;
-  pageId: string;
+  pageIds: string[];
   page: Page;
 };
 
-export default function ProductPerPage({ product, pageId, page }: PageProps) {
+export default function ProductPerPage({ product, pageIds, page }: PageProps) {
   const scope = product.scope;
 
   return (
@@ -32,7 +33,7 @@ export default function ProductPerPage({ product, pageId, page }: PageProps) {
               {scope === 0 ? (
                 <PageContent {...page} />
               ) : (
-                <AuthContent pageId={pageId} />
+                <AuthContent pageIds={pageIds} />
               )}
             </div>
           </div>
@@ -49,6 +50,10 @@ export const getStaticProps: GetStaticProps = async ({
 
   // 一度でQueryする方法がわからないので
   const product = await getProduct(params?.slug ?? "");
+  const pageIds = sortedPages(product.pagesCollection).map(
+    (item: PageInfo) => item.sys.id
+  );
+
   const pageId = product.pagesCollection.items.find(
     (item: PageInfo) => item.pageNumber === Number(pageNumber)
   )?.sys?.id;
@@ -58,7 +63,7 @@ export const getStaticProps: GetStaticProps = async ({
   return {
     props: {
       product,
-      pageId,
+      pageIds,
       page,
     },
   };

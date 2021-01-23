@@ -27,3 +27,8 @@ export type Page = {
     json: Document;
   };
 };
+
+export type CollectionType<T> = {
+  total: number;
+  items: T[];
+};

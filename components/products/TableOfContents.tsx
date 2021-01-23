@@ -1,5 +1,6 @@
 import { PageInfo, Product } from "../../models/product";
 import PageLink from "./PageLink";
+import { sortedPages } from "../../lib/utils";
 
 type TOCProps = {
   data: Product;
@@ -23,7 +24,7 @@ export default function TableOfContents({
             </div>
 
             <ul>
-              {pagesCollection.items.map((page: PageInfo) => (
+              {sortedPages(pagesCollection).map((page: PageInfo) => (
                 <li key={page.sys.id}>
                   {page.pageNumber === currentPage ? (
                     <span className="text-gray-800 bg-scarlet-200 flex items-center p-2 my-1 rounded-md ">
