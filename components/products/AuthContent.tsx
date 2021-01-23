@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import PageContent from "./PageContent";
 import { Page } from "../../models/product";
+import Loader from "../Loader";
+import Spinner from "../Spinner";
 
 type AuthContentProps = {
   pageIds: string[];
@@ -32,9 +34,9 @@ const AuthContent = ({ pageIds }: AuthContentProps) => {
     fetchData();
   }, [user, id]);
 
-  if (loading) return <div>Loading</div>;
+  if (loading) return <Spinner loading={true} />;
   if (!user) return <div>このコンテンツは表示できません。</div>;
-  if (pageLoading) return <div>読み込み中です</div>;
+  if (pageLoading) return <Spinner loading={true} />;
   if (!pageData) return <div>データがありません。</div>;
 
   return <PageContent {...pageData} />;

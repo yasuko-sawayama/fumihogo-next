@@ -32,7 +32,7 @@
     "**/*.tsx"
 ,
 "lib/api.js"
-],
+, "components/Loader.jsx"],
   "exclude": [
     "node_modules"
   ]
